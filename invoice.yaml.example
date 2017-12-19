@@ -1,0 +1,38 @@
+number: '001'
+date: '01/01/2018'
+hourly_rate: 25.00
+
+sender:
+  name: Sender
+  street_address: 456 Oak Ave.
+  city: City
+  state: State
+  zip_code: '12345'
+  phone_number: (555) 555-5555
+  email_address: evan@erblack.com
+
+recipient:
+  name: Recipient
+  street_address: 123. Main St.
+  city: Another City
+  state: Another State
+  zip_code: '54321'
+  phone_number: (555) 555-5555
+  email_address: charlene@reciprocare.co
+
+work:
+  - date: 12/19/2017
+    description:
+      - Did some stuff
+      - Did some other stuff
+    hours: 5
+
+  - date: 12/20/2017
+    description:
+      - Did some more stuff
+      - Did some more other stuff
+    hours: 2.5
+
+  - date: 12/21/2017
+    description: Some stuff
+    hours: 1

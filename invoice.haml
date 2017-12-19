@@ -1,0 +1,97 @@
+!!! 5
+- total_hours = @work.inject(0) { |acc, cur| acc + cur[:hours] }
+%html
+  %head
+    %title Invoker
+    :css
+      body {
+        max-width: 800px;
+        margin: 0 auto;
+        font-family: sans-serif;
+      }
+
+      table, th, td {
+        border: 1px solid black;
+      }
+
+      th, td {
+        padding: 4px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      thead, tfoot {
+        text-align: left;
+        background-color: #3d85c6;
+        color: white;
+        font-weight: bold;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 16px;
+      }
+  %body
+    %h1 Invoice
+    %h2 ##{@number} - #{@date}
+    %table
+      %thead
+        %tr
+          %th Sender
+          %th Recipient
+      %tbody
+        %tr
+          - [@sender, @recipient].each do |c|
+            %td
+              %p= c[:name]
+              %p= c[:street_address]
+              %p #{c[:city]}, #{c[:state]} #{c[:zip_code]}
+              %p
+                %a{ href: "tel:#{c[:phone_number]}" }= c[:phone_number]
+              %p
+                %a{ href: "mailto:#{c[:email_address]}" }= c[:email_address]
+
+    %table
+      %colgroup
+        %col{ style: 'width: 20%' }
+        %col{ style: 'width: 50%' }
+        %col{ style: 'width: 10%' }
+        %col{ style: 'width: 10%' }
+        %col{ style: 'width: 10%' }
+      %thead
+        %tr
+          %th Date
+          %th Description
+          %th Hours
+          %th Rate
+          %th Amount
+      %tbody
+        - @work.each do |i|
+          %tr
+            %td= i[:date]
+            %td
+              - if i[:description].is_a? Array
+                %ul
+                  - i[:description].each do |j|
+                    %li= j
+              - else
+                = i[:description]
+            %td= i[:hours]
+            %td= '$%.2f' % @hourly_rate
+            %td= '$%.2f' % (i[:hours] * @hourly_rate)
+      %tfoot
+        %tr
+          %td
+          %td
+          %td= total_hours
+          %td= '$%.2f' % @hourly_rate
+          %td= '$%.2f' % (total_hours * @hourly_rate)
+
