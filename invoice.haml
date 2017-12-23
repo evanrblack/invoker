@@ -24,7 +24,7 @@
         margin-top: 20px;
       }
 
-      thead, tfoot {
+      thead, tr.total {
         text-align: left;
         background-color: #3d85c6;
         color: white;
@@ -38,6 +38,10 @@
       ul {
         margin: 0;
         padding-left: 16px;
+      }
+
+      tr, td, th {
+        page-break-inside: avoid !important;
       }
   %body
     %h1 Invoice
@@ -87,9 +91,8 @@
             %td= i[:hours]
             %td= '$%.2f' % @hourly_rate
             %td= '$%.2f' % (i[:hours] * @hourly_rate)
-      %tfoot
-        %tr
-          %td
+        %tr.total
+          %td TOTAL
           %td
           %td= total_hours
           %td= '$%.2f' % @hourly_rate
