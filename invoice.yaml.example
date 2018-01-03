@@ -1,6 +1,7 @@
 number: '001'
 date: '01/01/2018'
 hourly_rate: 25.00
+paid: false
 
 sender:
   name: Sender

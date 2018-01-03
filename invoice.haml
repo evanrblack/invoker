@@ -43,7 +43,22 @@
       tr, td, th {
         page-break-inside: avoid !important;
       }
+
+      .paid-stamp {
+        color: red;
+        font-size: 32px;
+        font-weight: bold;
+        border: 2px dashed red;
+        display: inline-block;
+        padding: 8px;
+        border-radius: 16px;
+        text-align: center;
+        float: right;
+        font-family: monospace;
+      }
   %body
+    - if @paid
+      .paid-stamp PAID
     %h1 Invoice
     %h2 ##{@number} - #{@date}
     %table
