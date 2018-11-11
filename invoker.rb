@@ -1,12 +1,22 @@
+#!/usr/bin/env ruby
+
 require 'psych'
 require 'hamlit'
 require 'pdfkit'
 
 class Invoice
   def initialize
-    hash = Psych.load(File.read('invoice.yaml'), symbolize_names: true)
+    hash = Psych.load(File.read(ARGV[0] || 'invoice.yaml'), symbolize_names: true)
     hash.each do |k, v|
       instance_variable_set("@#{k}", v)
+    end
+  end
+
+  def name
+    if @paid
+      "Invoice ##{@number} - Paid"
+    else
+      "Invoice ##{@number}"
     end
   end
 
@@ -17,4 +27,5 @@ class Invoice
 end
 
 invoice = Invoice.new
-puts PDFKit.new(invoice.render).to_file('invoice.pdf')
+PDFKit.new(invoice.render).to_file("#{invoice.name}.pdf")
+puts "Created \"#{invoice.name}.pdf\""

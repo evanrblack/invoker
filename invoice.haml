@@ -2,7 +2,7 @@
 - total_hours = @work.inject(0) { |acc, cur| acc + cur[:hours] }
 %html
   %head
-    %title Invoker
+    %title= name
     :css
       body {
         max-width: 800px;
